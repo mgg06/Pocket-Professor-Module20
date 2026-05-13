@@ -1,0 +1,283 @@
+* { /* Selecciona genéricamente todos los elementos para aplicar estilos de reseteo base */
+    box-sizing: border-box; /* Asegura que el relleno y los bordes sean incluidos en el ancho y alto total del elemento */
+} /* Finaliza el bloque del selector CSS universal */
+
+@font-face {
+    font-family: 'DreamLife';
+    src: url('assets/fonts/DreamLife-V1.0.0_by_MaxiGamer.ttf') format('truetype'),
+         url('assets/fonts/DreamLife-V1.0.0_by_MaxiGamer.otf') format('opentype');
+}
+
+body { /* Estilos principales que hereda todo el cuerpo del documento */
+    margin: 0; /* Elimina cualquier margen residual predeterminado del navegador */
+    padding: 0; /* Asegura que no haya un relleno blanco alrededor de los bordes del juego */
+    font-family: 'DreamLife', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Inyecta la fuente corporativa limpia y lúdica */
+    background-color: #fff0f3; /* Fija un rosa extremadamente suave como fondo de resguardo */
+    text-align: center; /* Alineación del texto por defecto en posición centrada */
+    color: #590d22;
+    overflow-x: hidden; /* Corta radicalmente el desplazamiento/scroll horizontal si la imagen del mapa es grande */
+    letter-spacing: 1px; /* Añade un poco de separación a la letra */
+} /* Finaliza los estilos integrales del body */
+
+.screen { /* Contenedor maestro utilizado para seccionar cada bloque visual de pantalla interactiva */
+    background: #fff0f3; /* Fondo neutral unificado para transiciones */
+    padding: 20px; /* Relleno perimetral predeterminado */
+    border-radius: 0; /* Fuerza a pantalla completa sin rebordes */
+    box-shadow: none; /* Descarta sombras internas para evitar recargar el DOM */
+    width: 100vw; /* Asegura que ocupe todo el ancho físico de la pantalla de dispositivo (viewport width) */
+    min-height: 100vh; /* Obliga a la sección a al menos extenderse de inicio a fin del dispositivo (viewport height) */
+    margin: 0; /* Limpieza de márgenes heredados */
+} /* Fin de los ajustes de las divisiones macro .screen */
+
+.hidden { /* Clase de utilidad para colapsar y borrar lógicamente componentes mediante JavaScript */
+    display: none !important; /* Fuerza (con máxima prioridad) que el div quede inhabilitado del flujo de pantalla */
+} /* Concluye los estilos de invisibilidad */
+
+button { /* Capa de estilo general para inyectar una apariencia común a cualquier pulsador/botón */
+    background-color: #ff4d6d; /* Tono de fondo rosa identificativo del juego */
+    color: white; /* Tipografía para máximo contraste */
+    border: 3px solid #ffccd5; /* Marco de borde exterior contundente con color de acento rosa claro */
+    padding: 10px 20px; /* Empuja el contenido desde el centro hacia afuera dándole buen tamaño al botón */
+    margin: 10px; /* Protege a los botones de estar pegados entre sí */
+    border-radius: 20px; /* Curvatura acusada para darles ese estilo redondeado de juego moderno */
+    font-size: 16px; /* Ajuste para lectura perfecta y clara en pantallas y móviles */
+    font-family: 'DreamLife', 'Segoe UI', sans-serif; /* Cohesión de estilo de letra para botones */
+    transition: all 0.3s ease; /* Parametriza una pequeña animación de rebote y luz en todos los cambios CSS */
+    box-shadow: 0 4px 6px rgba(128, 15, 47, 0.2); /* Proyecta una sombra para efecto táctil volumétrico */
+} /* Cierre del bloque primario de la clase button */
+
+button:hover { /* Estado de comportamiento pseudoclase al hacer "Hover" (pasar ratón sobre) */
+    background-color: #c9184a; /* Transiciona su estado oscuro indicando posibilidad de clic */
+    transform: translateY(-2px); /* Pequeña alteración en su matriz Y para elevarlo en el aire (Efecto pulsación pop) */
+    box-shadow: 0 6px 8px rgba(89, 13, 34, 0.3); /* Aumenta y emborrona la sombra, reforzando la elevación tridimensional */
+} /* Cierre de interactividad del botón */
+
+.buildings-grid { /* Rejilla de estructuración interna para distribuir los comercios / pasillos */
+    display: grid; /* Usa Flex-Grid para alineamiento inteligente de los elementos interiores */
+    grid-template-columns: 1fr 1fr; /* Ordena matemáticamente su interior en un patrón de 2 porciones simétricas */
+    gap: 15px; /* Instancia una fosa divisoria perimetral entre cada cuadrado del panel */
+} /* Fin de configuración flexbox grid */
+
+.windows-grid { /* Panel estructural estético base para distribuir las ventanas/aulas individualmente */
+    display: grid; /* Activación modo Grid */
+    grid-template-columns: 1fr 1fr; /* Empaquetado a 2 columnas gemelas a pantalla partida */
+    gap: 20px; /* Respiro entre ventana y ventana */
+    background-color: #ffb3c1; /* Fondeado rosa como chasis / pared de la zona de apartamentos */
+    padding: 20px; /* Marco engrosado del propio bloque exterior */
+    border-radius: 20px; /* Bordes suaves y limados para el bloque estructural */
+} /* Cierre ventana arquitectónica Grid */
+
+.window { /* Marco base referenciado para elementos individuales a modo de ventana */
+    background-color: #fff0f3; /* Base interior cristalina o blanqueada para visibilidad */
+    padding: 30px 10px; /* Deforma la caja haciéndola más alta (30) que ancha en acolchado (10) para forma de ventana */
+    border: 4px solid #ff4d6d; /* Fija un borde ancho, emulando el marco físico metálico o de madera */
+    font-weight: bold; /* Modificador que enfatiza en negrita cualquier texto alojado en ella (por ej. la Asignatura) */
+    border-radius: 15px; /* Achata moderadamente el cerco de la ventana */
+    color: #590d22; /* Asegura un contraste potente y legible contra el fondo pálido */
+    transition: background-color 0.3s ease;
+} /* Final de hoja de estilos del objeto "Window" */
+
+.window:hover { /* Animación y reestructuración aplicable cuando se sobrepone el cursor encima de una ventana */
+    background-color: #ffccd5; /* Sombrea y ruboriza visualmente el fondo para manifestar selección del ratón */
+} /* Termina el modificador al apuntar/tocar ventana */
+
+#teacher-avatar { /* Bloque base del DOM donde reside la imagen de personaje e invoca su burbuja */
+    font-size: 80px; /* (Si existieran emojis o fuentes base, impone escala masiva) */
+    margin: 20px 0; /* Separa superior e inferiormente para no comerse el borde del techo/menú del pasillo */
+} /* Final de la configuración genérica del avatar en pantalla */
+
+@keyframes walk {
+    0% { transform: scaleX(var(--flip, 1)) translateY(0) rotate(0deg); }
+    25% { transform: scaleX(var(--flip, 1)) translateY(-15px) rotate(-10deg); }
+    50% { transform: scaleX(var(--flip, 1)) translateY(0) rotate(0deg); }
+    75% { transform: scaleX(var(--flip, 1)) translateY(-15px) rotate(10deg); }
+    100% { transform: scaleX(var(--flip, 1)) translateY(0) rotate(0deg); }
+}
+
+.walking {
+    animation: walk 0.4s infinite ease-in-out;
+}
+
+@keyframes bounceGift {
+    0% { transform: translateY(0) scale(1) rotate(0deg); }
+    100% { transform: translateY(-15px) scale(1.05) rotate(10deg); }
+}
+
+@keyframes floatMoney {
+    0% { transform: translate(-50%, 0); opacity: 1; }
+    100% { transform: translate(-50%, -80px); opacity: 0; }
+}
+
+.floating-money {
+    position: absolute;
+    color: #8bc34a;
+    font-weight: bold;
+    font-size: 35px;
+    text-shadow: 2px 2px 0px white, -2px -2px 0px white, 2px -2px 0px white, -2px 2px 0px white;
+    z-index: 200;
+    animation: floatMoney 1.5s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes jumpAvatar {
+    0% { transform: scaleX(var(--flip, 1)) translateY(0); }
+    40% { transform: scaleX(var(--flip, 1)) translateY(-40px); }
+    60% { transform: scaleX(var(--flip, 1)) translateY(-40px); }
+    100% { transform: scaleX(var(--flip, 1)) translateY(0); }
+}
+.jumping { animation: jumpAvatar 0.5s ease-out; }
+
+@keyframes playAvatar {
+    0%, 100% { transform: scaleX(var(--flip, 1)) rotate(0deg); }
+    25% { transform: scaleX(var(--flip, 1)) rotate(10deg); }
+    75% { transform: scaleX(var(--flip, 1)) rotate(-10deg); }
+}
+.playing { animation: playAvatar 0.4s infinite; }
+
+@keyframes playToyItem {
+    0%, 100% { transform: translateY(-15px) scale(1.1) rotate(0deg); }
+    50% { transform: translateY(-40px) scale(1.3) rotate(180deg); }
+}
+.playing-toy { animation: playToyItem 0.6s infinite alternate ease-in-out !important; }
+
+/* Estilos personalizados para la barra de desplazamiento (Scrollbar) del Menú del Profesor y Menús Interiores */
+#teacher-menu::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+#teacher-menu::-webkit-scrollbar-track {
+    background: rgba(255, 204, 213, 0.5); 
+    border-radius: 10px;
+}
+#teacher-menu::-webkit-scrollbar-thumb {
+    background: #ff4d6d; 
+    border-radius: 10px;
+}
+#teacher-menu div::-webkit-scrollbar-thumb {
+    background: #ff4d6d; 
+    border-radius: 10px;
+}
+#teacher-menu div::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+#teacher-menu::-webkit-scrollbar-thumb:hover {
+    background: #c9184a; 
+}
+
+/* Animaciones CSS adicionales del profesor (Motor lógico visual manipulado a través de Clases) */
+@keyframes spinAvatar {
+    0% { transform: scaleX(var(--flip, 1)) rotate(0deg); }
+    100% { transform: scaleX(var(--flip, 1)) rotate(360deg); }
+}
+.spinning { animation: spinAvatar 0.6s ease-in-out; }
+
+@keyframes wobbleAvatar {
+    0%, 100% { transform: scaleX(var(--flip, 1)) translateX(0) rotate(0deg); }
+    25% { transform: scaleX(var(--flip, 1)) translateX(-10px) rotate(-10deg); }
+    75% { transform: scaleX(var(--flip, 1)) translateX(10px) rotate(10deg); }
+}
+.wobbling { animation: wobbleAvatar 0.5s ease-in-out; }
+
+@keyframes nodAvatar {
+    0%, 100% { transform: scaleX(var(--flip, 1)) translateY(0); }
+    50% { transform: scaleX(var(--flip, 1)) translateY(15px); }
+}
+.nodding { animation: nodAvatar 0.4s ease-in-out 2; }
+
+@keyframes shakeAvatar {
+    0%, 100% { transform: scaleX(var(--flip, 1)) translateX(0); }
+    25% { transform: scaleX(var(--flip, 1)) translateX(-15px); }
+    75% { transform: scaleX(var(--flip, 1)) translateX(15px); }
+}
+.shaking { animation: shakeAvatar 0.3s ease-in-out 2; }
+
+@keyframes struggle {
+    0%, 100% { transform: rotate(5deg) scaleX(var(--flip, 1)); }
+    50% { transform: rotate(-5deg) scaleX(var(--flip, 1)); }
+}
+.struggling { animation: struggle 0.15s infinite linear; }
+
+@keyframes danceAvatar {
+    0%, 100% { transform: scaleX(var(--flip, 1)) translateY(0) rotate(0deg); }
+    25% { transform: scaleX(var(--flip, 1)) translateY(-10px) rotate(-15deg); }
+    50% { transform: scaleX(var(--flip, 1)) translateY(0) rotate(0deg); }
+    75% { transform: scaleX(var(--flip, 1)) translateY(-10px) rotate(15deg); }
+}
+.dancing { animation: danceAvatar 0.5s infinite; }
+
+@keyframes sitAvatar {
+    0% { transform: scaleX(var(--flip, 1)) translateY(0); }
+    100% { transform: scaleX(var(--flip, 1)) translateY(20px) scaleY(0.85); }
+}
+.sitting { animation: sitAvatar 0.3s forwards; }
+
+@keyframes runAvatar {
+    0%, 50%, 100% { transform: scaleX(var(--flip, 1)) translateY(0) rotate(0deg); }
+    25% { transform: scaleX(var(--flip, 1)) translateY(-20px) rotate(-15deg); }
+    75% { transform: scaleX(var(--flip, 1)) translateY(-20px) rotate(15deg); }
+}
+.running { animation: runAvatar 0.25s infinite ease-in-out; }
+
+@keyframes bowAvatar {
+    0%, 100% { transform: scaleX(var(--flip, 1)) rotate(0deg); }
+    50% { transform: scaleX(var(--flip, 1)) rotate(20deg) translateY(10px); }
+}
+.bowing { animation: bowAvatar 0.5s ease-in-out; }
+
+@keyframes shiverAvatar {
+    0%, 100% { transform: scaleX(var(--flip, 1)) translateX(0); }
+    25% { transform: scaleX(var(--flip, 1)) translateX(-2px); }
+    75% { transform: scaleX(var(--flip, 1)) translateX(2px); }
+}
+.shivering { animation: shiverAvatar 0.1s infinite; }
+
+@keyframes floatAvatar {
+    0%, 100% { transform: scaleX(var(--flip, 1)) translateY(0); }
+    50% { transform: scaleX(var(--flip, 1)) translateY(-20px); }
+}
+.floating { animation: floatAvatar 2s infinite ease-in-out; }
+
+@keyframes waveAvatar {
+    0%, 100% { transform: scaleX(var(--flip, 1)) rotate(0deg); }
+    25% { transform: scaleX(var(--flip, 1)) rotate(15deg); }
+    75% { transform: scaleX(var(--flip, 1)) rotate(-15deg); }
+}
+.waving { animation: waveAvatar 0.5s infinite; }
+
+@keyframes squatAvatar {
+    0%, 100% { transform: scaleX(var(--flip, 1)) scaleY(1) translateY(0); }
+    50% { transform: scaleX(var(--flip, 1)) scaleY(0.8) translateY(15px); }
+}
+.squatting { animation: squatAvatar 0.6s infinite; }
+
+@keyframes stretchAvatar {
+    0%, 100% { transform: scaleX(var(--flip, 1)) scaleY(1) translateY(0); }
+    50% { transform: scaleX(var(--flip, 1)) scaleY(1.1) translateY(-10px); }
+}
+.stretching { animation: stretchAvatar 0.6s infinite; }
+
+@keyframes sleepAvatar {
+    0%, 100% { transform: scaleX(var(--flip, 1)) rotate(90deg) translateX(20px); }
+    50% { transform: scaleX(var(--flip, 1)) rotate(90deg) translateX(20px) scale(1.05); }
+}
+.sleeping { animation: sleepAvatar 2s infinite; }
+
+@keyframes cheerAvatar {
+    0%, 100% { transform: scaleX(var(--flip, 1)) translateY(0); }
+    25% { transform: scaleX(var(--flip, 1)) translateY(-20px) scaleY(1.1); }
+    75% { transform: scaleX(var(--flip, 1)) translateY(-20px) scaleY(1.1); }
+}
+.cheering { animation: cheerAvatar 0.5s infinite; }
+
+@keyframes laughAvatar {
+    0%, 100% { transform: scaleX(var(--flip, 1)) translateY(0); }
+    50% { transform: scaleX(var(--flip, 1)) translateY(-5px); }
+}
+.laughing { animation: laughAvatar 0.2s infinite; }
+
+@keyframes thinkAvatar {
+    0%, 100% { transform: scaleX(var(--flip, 1)) rotate(5deg); }
+    50% { transform: scaleX(var(--flip, 1)) rotate(-5deg); }
+}
+.thinking { animation: thinkAvatar 1s infinite; }
