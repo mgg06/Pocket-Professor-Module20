@@ -158,6 +158,7 @@ function openHangout(teachers, destination) {
         avatarDiv.style.flexDirection = 'column';
         avatarDiv.style.alignItems = 'center';
         avatarDiv.style.zIndex = Math.floor(100 - bottomPos); // Más abajo = más z-index
+        avatarDiv.style.cursor = 'grab'; // Cursor de mano abierta
         
         const bubble = document.createElement('div');
         bubble.className = "bubble";
@@ -195,6 +196,9 @@ function openHangout(teachers, destination) {
             
             avatarDiv.setAttribute('data-dragging', 'true');
             img.classList.add('struggling');
+            
+            document.body.style.cursor = "grabbing";
+            avatarDiv.style.cursor = "grabbing";
             
             pos3 = e.clientX; pos4 = e.clientY;
             
@@ -247,6 +251,9 @@ function openHangout(teachers, destination) {
             document.onmouseup = null; document.onmousemove = null;
             clearInterval(dragPhraseInterval);
             img.classList.remove('struggling');
+            
+            document.body.style.cursor = "";
+            avatarDiv.style.cursor = "grab";
             
             const screenHeight = hangoutScreen.clientHeight;
             const floorTop = screenHeight * 0.95 - avatarDiv.clientHeight;

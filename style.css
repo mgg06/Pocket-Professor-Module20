@@ -84,6 +84,7 @@ button:hover { /* Estado de comportamiento pseudoclase al hacer "Hover" (pasar r
 #teacher-avatar { /* Bloque base del DOM donde reside la imagen de personaje e invoca su burbuja */
     font-size: 80px; /* (Si existieran emojis o fuentes base, impone escala masiva) */
     margin: 20px 0; /* Separa superior e inferiormente para no comerse el borde del techo/menú del pasillo */
+    cursor: grab; /* Muestra una mano abierta indicando que se puede agarrar */
 } /* Final de la configuración genérica del avatar en pantalla */
 
 @keyframes walk {

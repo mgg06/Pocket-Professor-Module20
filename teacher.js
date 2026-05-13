@@ -178,6 +178,9 @@ function setupAvatarDrag() {
         // Añadimos la animación de patalear/zarandearse
         const img = avatar.querySelector('img');
         if (img) img.classList.add('struggling');
+        
+        document.body.style.cursor = "grabbing"; // Fuerza el cursor de mano cerrada en toda la pantalla
+        avatar.style.cursor = "grabbing";
 
         // El objeto (si lo tiene) se queda en el suelo
         const giftContainer = document.getElementById('gift-container');
@@ -240,6 +243,9 @@ function setupAvatarDrag() {
         document.onmouseup = null; 
         document.onmousemove = null;
         clearInterval(dragPhraseInterval);
+        
+        document.body.style.cursor = ""; // Restaura el cursor normal al soltar
+        avatar.style.cursor = "grab"; // Vuelve a la mano abierta
 
         const img = avatar.querySelector('img');
         if (img) img.classList.remove('struggling');
